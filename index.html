@@ -1,0 +1,622 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Waqar Ali — Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+         :root {
+            --bg: #0b0d10;
+            --panel: #13151a;
+            --panel-2: #171a20;
+            --muted: #9aa3ad;
+            --text: #e8edf1;
+            --accent: #f4c066;
+            /* golden */
+            --border: #232631;
+            --radius: 16px;
+            --pad: 18px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, #07080a 0%, var(--bg) 60%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+        /* Layout */
+
+        .container {
+            max-width: 1200px;
+            margin: 28px auto;
+            display: grid;
+            gap: 24px;
+            grid-template-columns: 320px 1fr;
+            align-items: start;
+            padding: 0 18px;
+        }
+
+        @media (max-width:980px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Sidebar */
+
+        .sidebar {
+            position: sticky;
+            top: 24px;
+            height: fit-content;
+            background: linear-gradient(180deg, var(--panel), var(--panel-2));
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .03);
+            margin-bottom: 12px;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .name {
+            font-weight: 800;
+            font-size: 1.35rem;
+            margin: 6px 0;
+        }
+
+        .role {
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .03);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: .85rem;
+            border: 1px solid rgba(255, 255, 255, .02)
+        }
+
+        .contact-list {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: rgba(255, 255, 255, .02);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .contact-item i {
+            width: 28px;
+            text-align: center;
+            color: var(--accent)
+        }
+
+        .side-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, #10131a, #0d0f14);
+            font-weight: 700;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            background: linear-gradient(180deg, #ffd88a, #f4c066);
+            color: #111;
+            border-color: #f1c86b
+        }
+        /* Main content */
+
+        .main {
+            position: relative;
+        }
+
+        .topnav {
+            position: sticky;
+            top: 24px;
+            z-index: 40;
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 999px;
+            background: rgba(20, 22, 28, .6);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(6px);
+            margin-bottom: 18px;
+        }
+
+        .nav-link {
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: var(--accent);
+            color: #111;
+            border-color: rgba(0, 0, 0, .12)
+        }
+
+        section {
+            background: linear-gradient(180deg, var(--panel), var(--panel-2));
+            border-radius: 16px;
+            padding: 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.15rem
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+        /* Make anchor scrolling ignore sticky header */
+
+        section {
+            scroll-margin-top: 110px;
+        }
+        /* adjust based on nav+top gap */
+        /* Grid helpers */
+
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width:900px) {
+            .cols-2,
+            .cols-3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .02);
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            transition: transform .18s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px)
+        }
+
+        .project-thumb {
+            height: 140px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, #1b2430, #10131a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--muted)
+        }
+
+        .skills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .pill {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .35);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-weight: 700;
+            font-size: .86rem
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            padding: 10px 0;
+            font-size: .95rem;
+        }
+        /* Inputs */
+
+        .input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, .25);
+            color: var(--text);
+            outline: none;
+        }
+
+        .input:focus {
+            box-shadow: 0 0 0 6px rgba(244, 192, 102, .08);
+            border-color: rgba(244, 192, 102, .6)
+        }
+        /* Responsive: move sidebar above content on small screens */
+
+        @media (max-width:980px) {
+            .sidebar {
+                position: relative;
+                top: auto;
+                display: flex;
+                gap: 14px;
+                align-items: center;
+                padding: 14px;
+            }
+            .avatar {
+                width: 72px;
+                height: 72px;
+            }
+            .name {
+                font-size: 1.05rem
+            }
+            .topnav {
+                position: sticky;
+                top: 18px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-label="Profile sidebar">
+            <div class="avatar"><img src="1.jpg" alt="Profile photo" onerror="this.src='https://i.pravatar.cc/240'"></div>
+            <div class="name">Waqar Ali</div>
+            <div class="role">Analytics & Code </div>
+            <div class="badge"><i class="fa-solid fa-laptop-code"></i> Open to work</div>
+
+            <div class="contact-list">
+                <a class="contact-item" href="mailto:waqarnaich83@gmail.com">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Email: waqarnaich83@gmail.com</span>
+                </a>
+
+                <a class="contact-item" href="tel:+923090985220">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Phone: +92 309 0985220</span>
+                </a>
+
+                <a class="contact-item" href="https://maps.google.com/?q=Karachi,Sindh,Pakistan" target="_blank">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Karachi, Sindh, Pakistan</span>
+                </a>
+            </div>
+
+            <div class="side-actions">
+                <!-- Yahan tumhari actual PDF file ka link hai -->
+                <a class="btn primary" href="resume_waqar_ali.pdf" download="resume_waqar_ali.pdf">
+                    <i class="fa-solid fa-download"></i>Download CV
+                </a>
+                <a class="btn" href="#contact"><i class="fa-regular fa-paper-plane"></i>Contact</a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <nav class="topnav" role="navigation" aria-label="Main navigation">
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#services">What I Do</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <a class="nav-link" href="#resume">Resume</a>
+                <a class="nav-link" href="#blog">Blog</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </nav>
+
+            <!-- About -->
+            <section id="about" aria-labelledby="about-title">
+                <div class="section-title"><i class="fa-regular fa-user"></i> <span id="about-title">About Me</span></div>
+                <p class="muted">Hi, I’m Waqar Ali, a driven Data Scientist & Web Developer passionate about creating responsive websites and building data-driven solutions. I enjoy turning ideas into practical projects that challenge my creativity and problem-solving
+                    skills.
+                </p>
+
+                <div class="grid cols-2" style="margin-top:14px">
+                    <div class="card">
+                        <h4 style="margin:0 0 8px">Short Bio</h4>
+                        <p class="muted" style="margin:0">Data-driven thinker. Passionate coder. Building responsive websites and insightful data solutions.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin:0 0 8px">Quick Facts</h4>
+                        <ul class="muted" style="margin:0; padding-left:18px">
+                            <li>Education: BS Computer Science</li>
+                            <li>Intests: Data Science & Analytics | Web Development (HTML/CSS projects)</li>
+                            <li>Availability: Open for Data Science Internships | Freelance Web Projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What I Do -->
+            <section id="services" aria-labelledby="services-title">
+                <div class="section-title"><i class="fa-solid fa-briefcase"></i> <span id="services-title">What I’m Doing</span></div>
+                <div class="grid cols-3" style="margin-top:12px">
+                    <div class="card">
+                        <div class="pill"><i class="fa-solid fa-display"></i> Web Dev</div>
+                        <h4 style="margin-top:8px">Responsive Sites</h4>
+                        <p class="muted">Semantic HTML, clean CSS, responsive and accessible interfaces.</p>
+                    </div>
+                    <div class="card">
+                        <div class="pill"><i class="fa-solid fa-robot"></i> Data</div>
+                        <h4 style="margin-top:8px">Data Analysis</h4>
+                        <p class="muted">Transforming data into insights through cleaning, visualization, and basic modeling, while building projects that demonstrate practical skills.</p>
+                    </div>
+                    <div class="card">
+                        <div class="pill"><i class="fa-solid fa-mobile-screen"></i> Apps</div>
+                        <h4 style="margin-top:8px">Mobile-first</h4>
+                        <p class="muted">Creating responsive websites with clean HTML & CSS that are accessible and user-friendly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" aria-labelledby="projects-title">
+                <div class="section-title"><i class="fa-regular fa-folder-open"></i> <span id="projects-title">Projects</span></div>
+
+                <div class="grid cols-3" style="margin-top:12px">
+                    <article class="card">
+                        <div class="project-thumb"><img src="images/proj1.jpg" alt="Project 1" onerror="this.style.opacity=.2; this.parentNode.innerHTML='Project 1';" style="width:100%; height:100%; object-fit:cover"></div>
+                        <h4 style="margin:10px 0 6px">Portfolio UI</h4>
+                        <p class="muted">Dark-themed portfolio UI built with HTML & CSS. Smooth animations and responsive layout.</p>
+                        <div class="skills" style="margin-top:10px"><span class="pill">HTML</span><span class="pill">CSS</span></div>
+                        <div style="margin-top:10px"><a class="btn" href="#" target="_blank"><i class="fa-brands fa-github"></i> View</a></div>
+                    </article>
+
+                    <article class="card">
+                        <div class="project-thumb"><img src="images/proj2.jpg" alt="Project 2" onerror="this.style.opacity=.2; this.parentNode.innerHTML='Project 2';" style="width:100%; height:100%; object-fit:cover"></div>
+                        <h4 style="margin:10px 0 6px">Sales Dashboard</h4>
+                        <p class="muted">Interactive dashboard with CSV ingest and KPIs.</p>
+                        <div class="skills" style="margin-top:10px"><span class="pill">Python</span><span class="pill">Plotly</span></div>
+                        <div style="margin-top:10px"><a class="btn" href="#" target="_blank"><i class="fa-solid fa-up-right-from-square"></i> Live</a></div>
+                    </article>
+
+                    <article class="card">
+                        <div class="project-thumb"><img src="images/proj3.jpg" alt="Project 3" onerror="this.style.opacity=.2; this.parentNode.innerHTML='Project 3';" style="width:100%; height:100%; object-fit:cover"></div>
+                        <h4 style="margin:10px 0 6px">Titanic EDA</h4>
+                        <p class="muted">Exploratory analysis and model notebook with visual storytelling.</p>
+                        <div class="skills" style="margin-top:10px"><span class="pill">Pandas</span><span class="pill">Matplotlib</span></div>
+                        <div style="margin-top:10px"><a class="btn" href="#" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Resume -->
+            <section id="resume" aria-labelledby="resume-title">
+                <div class="section-title"><i class="fa-regular fa-file-lines"></i> <span id="resume-title">Resume Snapshot</span></div>
+                <div class="grid cols-2" style="margin-top:12px">
+                    <div class="card">
+                        <h4 style="margin-top:0">Experience</h4>
+                        <p class="muted" style="margin:6px 0">Data Scientist Intern (DSJ) Worked on data preprocessing, analysis, and predictive modeling using Python and Pandas. Visualized insights with Matplotlib & Seaborn, improving data-driven understanding. Skills: Python, Pandas, Scikit-Learn,
+                            Matplotlib, Seaborn.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin-top:0">Education</h4>
+                        <p class="muted" style="margin:6px 0">Bachelors Computer Science | sir syed university of engineering and rechnology, karachi, Pakistan</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin-top:0">Skills</h4>
+                        <div class="skills" style="margin-top:6px"><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">pandas</span><span class="pill">numpy</span><span class="pill">power BI</span><span class="pill">Matplotlib</span></div>
+                    </div>
+                    <div class="card">
+                        <h4 style="margin-top:0">Achievements</h4>
+                        <ul class="muted" style="margin:6px 0; padding-left:18px">
+                            <li>Kaggle practice</li>
+                            <li>Data Science Internship</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog -->
+            <section id="blog" aria-labelledby="blog-title">
+                <div class="section-title"><i class="fa-regular fa-newspaper"></i> <span id="blog-title">Blog / Articles</span></div>
+                <div class="grid cols-3" style="margin-top:12px">
+                    <article class="card">
+                        <div class="project-thumb" style="height:100px; display:flex; align-items:center; justify-content:center">Blog 1</div>
+                        <h4 style="margin:10px 0 6px">Design Conferences</h4>
+                        <p class="muted">Short summary or excerpt from the article.</p>
+                    </article>
+                    <article class="card">
+                        <div class="project-thumb" style="height:100px; display:flex; align-items:center; justify-content:center">Blog 2</div>
+                        <h4 style="margin:10px 0 6px">Best Fonts</h4>
+                        <p class="muted">Short excerpt for visual/article content.</p>
+                    </article>
+                    <article class="card">
+                        <div class="project-thumb" style="height:100px; display:flex; align-items:center; justify-content:center">Blog 3</div>
+                        <h4 style="margin:10px 0 6px">UI Interactions</h4>
+                        <p class="muted">Short excerpt for the post.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact" aria-labelledby="contact-title">
+                <div class="section-title"><i class="fa-regular fa-paper-plane"></i> <span id="contact-title">Contact</span></div>
+                <div class="grid cols-2" style="margin-top:12px">
+                    <div class="card">
+                        <h4 style="margin-top:0">Let's connect</h4>
+                        <p class="muted">Email me or ping on LinkedIn / GitHub</p>
+                        <div style="margin-top:10px" class="skills">
+                            <a class="pill" href="https://mail.google.com/mail/?view=cm&fs=1&to=waqarnaich83@gmail.com&su=Contact%20from%20Portfolio&body=Hi%20Waqar,%0A%0AI%20just%20visited%20your%20portfolio%20and%20wanted%20to%20connect." target="_blank">
+                                <i class="fa-regular fa-envelope"></i> Email
+                            </a>
+
+
+
+                            <a class="pill" href="https://www.linkedin.com/in/waqar-ali-bb45b1246/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                            <a class="pill" href="https://github.com/" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4 style="margin-top:0">Send a message</h4>
+                        <form id="contact-form">
+                            <div style="display:grid; gap:10px">
+                                <input class="input" type="text" name="from_name" placeholder="Your Name" required>
+                                <input class="input" type="email" name="reply_to" placeholder="Your Email" required>
+                                <textarea class="input" rows="3" name="message" placeholder="Your Message" required></textarea>
+                                <button type="submit" class="btn primary"><i class="fa-regular fa-paper-plane"></i> Send</button>
+                            </div>
+                        </form>
+                        <p id="form-status" class="muted" style="margin-top:10px;"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EmailJS Library -->
+            <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+            <script>
+                (function(){
+                    emailjs.init("-HZ21Bwaih1xr-p3Y"); // ✅ Tumhara Public Key
+                })();
+
+                // Form handle
+                document.getElementById("contact-form").addEventListener("submit", function(e) {
+                    e.preventDefault();
+
+                    emailjs.sendForm("service_blqvi5l", "template_paj9abo", this)
+                        .then(function() {
+                            document.getElementById("form-status").textContent = "✅ Message sent successfully!";
+                        }, function(error) {
+                            document.getElementById("form-status").textContent = "❌ Failed to send. Try again!";
+                            console.error("EmailJS Error:", error);
+                        });
+                });
+            </script>
+
+            <script>
+                // Smooth scroll for all nav links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            e.preventDefault();
+                            const target = document.querySelector(href);
+                            if (target) {
+                                const navHeight = 20; // small offset (we use scroll-margin-top on sections too)
+                                const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                                window.scrollTo({
+                                    top,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    });
+                });
+
+                // IntersectionObserver to highlight active nav link
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                const obs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            navLinks.forEach(a => {
+                                a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+                            });
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '-40% 0px -40% 0px',
+                    threshold: 0
+                });
+
+                sections.forEach(s => obs.observe(s));
+
+                // Year auto-update
+                document.getElementById('year').textContent = new Date().getFullYear();
+
+                // Small accessibility: close focus outline only when using mouse
+                (function() {
+                    function handleFirstTab(e) {
+                        if (e.key === 'Tab') {
+                            document.documentElement.classList.add('user-is-tabbing');
+                            window.removeEventListener('keydown', handleFirstTab);
+                        }
+                    }
+                    window.addEventListener('keydown', handleFirstTab);
+                })();
+            </script>
+
+            </body>
+
+            </html>
